@@ -930,6 +930,7 @@ module ariane import ariane_pkg::*; #(
       rvfi_o[i].rd_addr  = commit_instr_id_commit[i].rd;
       rvfi_o[i].rd_wdata = ariane_pkg::is_rd_fpr(commit_instr_id_commit[i].op) == 0 ? wdata_commit_id[i] : commit_instr_id_commit[i].result;
       rvfi_o[i].pc_rdata = commit_instr_id_commit[i].pc;
+      rvfi_o[i].halt     = commit_instr_id_commit[i].ex.tval[31:0] == 32'h00000073 ? 1'b1 : 1'b0;
     end
 `endif
 
